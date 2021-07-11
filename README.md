@@ -41,51 +41,9 @@ deployed contract to => 0x90dEC914c747045F8036Cebb4827A46cEe848783:0 (wei)
 (16)    0x476644De11a2B90Bb91070743038cd989CE6436F:10000000000000000000000
 (17)    0x43189748eEd71b22Ae6D9d69E967E3Dc1a72815D:10000000000000000000000
 (18)    0xD05466611A52A267411F16468f2E32c0a6142892:10000000000000000000000
-🎉🎉🎉 Let's push buttons
+🎉🎉🎉 Let\'s push buttons
       ✓ should display other unnamed addresses and balances
-interface
-provider
-signer
-callStatic
-estimateGas
-functions
-populateTransaction
-filters
-_runningEvents
-_wrappedEmits
-address
-resolvedAddress
-author()
-balance()
-claim_treasure()
-entry_fee()
-num_players()
-owner()
-participated(address)
-paused()
-players(uint256)
-press_button()
-renounceOwnership()
-restart()
-set_entry_fee(uint256)
-transferOwnership(address)
-author
-balance
-claim_treasure
-entry_fee
-num_players
-owner
-participated
-paused
-players
-press_button
-renounceOwnership
-restart
-set_entry_fee
-transferOwnership
-deployTransaction
-_deployedPromise
-      ✓ should display contract keys
+
 author:Mark Phillips
 minimum fee:100000
       ✓ should display contract properties
@@ -129,8 +87,9 @@ advancing:(6):
         tx:
         current block time:1626219630 => adv block time:1626306030
 
-Winner Winner Chicken Dinner:0xef95d32294087Bb39f9e341bed818b29E748645A - let's claim_treasure.
+Winner Winner Chicken Dinner:0xef95d32294087Bb39f9e341bed818b29E748645A - let\'s claim_treasure.
 Winner Winner Chicken Dinner:0xef95d32294087bb39f9e341bed818b29e748645a of 300000 (wei)
+
 Collection block no.:7, current block no.:8
 (8) 0xef95d32294087Bb39f9e341bed818b29E748645A => 
         9999998880040000200000 (⛽ 38891)
@@ -176,8 +135,9 @@ advancing:(13):
         tx:
         current block time:1626478834 => adv block time:1626565234
 
-Winner Winner Chicken Dinner:0xef95d32294087Bb39f9e341bed818b29E748645A - let's claim_treasure.
+Winner Winner Chicken Dinner:0xef95d32294087Bb39f9e341bed818b29E748645A - let\'s claim_treasure.
 Winner Winner Chicken Dinner:0xef95d32294087bb39f9e341bed818b29e748645a of 300000 (wei)
+
 Collection block no.:14, current block no.:15
 (15) 0xef95d32294087Bb39f9e341bed818b29E748645A => 
         9999997760080000400000 (⛽ 38891)
@@ -225,7 +185,7 @@ Button balance after payout => 0
 
   6 passing (1s)
 
-Time: 0h:00m:06s                                                                                                                                                                                                                                                                                     
+Time: 0h:00m:06s                                                                                                                                                                                                                                                             
 ```
 
 ### Coverage
