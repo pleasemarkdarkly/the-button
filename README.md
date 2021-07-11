@@ -8,5 +8,7 @@ yarn && yarn run build && yarn run compile && yarn run test
 ```
 
 ## Ropsten
-`npx hardhat run --network ropsten ./scripts/Button/deploy.ts`
-`npx hardhat verify --network ropsten 0x61E3CdEA9E1e39D5abA746622859888Bd17aCf28 "100000"`
+```bash
+npx hardhat run --network ropsten ./scripts/Button/deploy.ts
+npx hardhat verify --network ropsten 0x61E3CdEA9E1e39D5abA746622859888Bd17aCf28 "100000"
+```
