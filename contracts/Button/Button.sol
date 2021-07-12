@@ -4,13 +4,9 @@ pragma solidity ^0.8.4;
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract Button is Ownable, Pausable {    
-    
-    using SafeMath for uint256;    
-    
-    string public author = "Mark Phillips";
+            
     uint256 public num_players;
     uint256 public entry_fee;    
     
@@ -29,22 +25,16 @@ contract Button is Ownable, Pausable {
         entry_fee = _entry_fee;
     }
 
-    function set_entry_fee(uint _entry_fee) external onlyOwner isFinished {
-        require(_entry_fee > 0, "ENTRY FEE MUST BE NON-ZERO");
-        state = State.Accepting;
-        entry_fee = _entry_fee;
-    }
-
     modifier joinable(){
-        require (state == State.Accepting, "STATE IS NOT JOINABLE");
+        require (state == State.Accepting, "BUTTON PUSHABLE");
         _;
     }
     modifier isFinished(){
-        require (state == State.Distributing, "STATE IS FINISHED");
+        require (state == State.Distributing, "BUTTON ROUND FINISHED");
         _;
     }
     modifier restartable(){
-        require (state == State.Paid, "STATE RESTARTABLE");
+        require (state == State.Paid, "BUTTON RESTARTING");
         _;
     }
 
@@ -53,9 +43,8 @@ contract Button is Ownable, Pausable {
     }
 
     function press_button() external payable joinable whenNotPaused {                
-        require(msg.value == entry_fee, "SENDER AMOUNT DOES NOT EQUAL ENTRY FEE");
-        require(msg.sender != address(0), "INVALID ADDRESS");                
-        require(participated[msg.sender] == uint256(0), "SINGLE ENTRY ALLOWED");
+        require(msg.value == entry_fee, "BUTTON PUSH REQUIRES ENTRY FEE");
+        require(participated[msg.sender] == uint256(0), "SORRY SINGLE ENTRY ALLOWED");
         console.log("button_pushed by %s contributing %s", msg.sender, msg.value);
         if(msg.value > 0){
             if(participated[msg.sender] == uint256(0)){
@@ -70,13 +59,13 @@ contract Button is Ownable, Pausable {
     }
 
     function claim_treasure() external payable isFinished whenNotPaused {
-        require(num_players == 3, "TREASURE CLAIM REQUIRES 3 PLAYERS"); 
-        require(block.number >= participated[msg.sender] + 3, "PREMATURE TREASURE CLAIM");
+        require(players[num_players - 1] == msg.sender, "YOU WERE NOT THE LAST BUTTON PUSHER");
         console.log("Winner Winner Chicken Dinner:%s of %s (wei)", players[num_players - 1], address(this).balance);
-        console.log("Collection block no.:%s, current block no.:%s", participated[msg.sender] + 3, block.number);        
+        require(block.number >= participated[msg.sender] + 3, "PREMATURE CLAIM TREASURE, PATIENCE");
+        console.log("Current  block no.:%s, Treasure unlock block no.:%s", block.number, participated[msg.sender] + 3);        
         state = State.Paid; 
         (bool sent, ) = payable(players[num_players - 1]).call{value: address(this).balance}("");
-        require(sent, "FAILED TO SEND ETHER TO WINNER");
+        require(sent, "UNABLE TO SEND TREASURE TO WINNER");
         if (sent){            
             restart();
         }

@@ -72,11 +72,8 @@ export function shouldBehaveLikeButton(): void {
     });
 
     it("should display contract properties", async function () {
-        const author: string = await this.Button.author();
-        const entry_fee: string = await this.Button.entry_fee();
-        process.stdout.write(`author:${author}` + `\n`);
+        const entry_fee: string = await this.Button.entry_fee();        
         process.stdout.write(`minimum fee:${entry_fee}` + `\n`);
-        expect(author).to.equal("Mark Phillips");
         expect(entry_fee).to.not.equal(0);
     });
 
